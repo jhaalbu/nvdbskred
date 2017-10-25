@@ -43,7 +43,7 @@ class nvdbVegnett:
         self.geofilter = {}
         self.headers =   { 'accept' : 'application/vnd.vegvesen.nvdb-v2+json', 
                             'X-Client' : 'nvdbapi.py',
-                            'X-Kontaktperson' : 'Anonymous'}
+                            'X-Kontaktperson' : 'Jan Helge Aalbu'}
                             
         self.update_http_header()
                             
@@ -362,7 +362,7 @@ class nvdbFagdata(nvdbVegnett):
 
         self.headers =   { 'accept' : 'application/vnd.vegvesen.nvdb-v2+json', 
                         'X-Client' : 'nvdbapi.py',
-                        'X-Kontaktperson' : 'Anonymous'}
+                        'X-Kontaktperson' : 'Jan Helge Aalbu'}
     
         self.paginering = { 'antall'         : 1000,     # Hvor mange obj vi henter samtidig.
                             
@@ -753,3 +753,4 @@ def merge_dicts(*dict_args):
     for dictionary in dict_args:
         result.update(dictionary)
     return result
+

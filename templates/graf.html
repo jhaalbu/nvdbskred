@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+{% block content %}
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr>
+    <td class="name">{{ field.name }}</td><td>{{ field(size=12) }}</td>
+    <td>{{ field.label }}</td>
+    {% if field.errors %}
+      <td><ul class=errors>
+      {% for error in field.errors %}
+        <li><font color="red">{{ error }}</font></li>
+      {% endfor %}</ul></td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+</table>
+<p><input type=submit value=Vis></form></p>
+<p>
+{% if result != None %}
+<div id={{ chartID|safe }} class="chart" style="height: 100px; width: 500px"></div>
+		<script>
+			var chart_id = {{ chartID|safe }}
+			var series = {{ series|safe }}
+			var title = {{ title|safe }}
+			var xAxis = {{ xAxis|safe }}
+			var yAxis = {{ yAxis|safe }}
+			var chart = {{ chart|safe }}
+		</script>
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+			<script src="http://code.highcharts.com/highcharts.js"></script>
+			<script src="../static/graph.js"></script>
+{% endif %}
+</p>
+{% endblock %}

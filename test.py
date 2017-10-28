@@ -30,16 +30,33 @@ def hentSkred(veg='Fv241', fylke=14):
     sNum = 0
     data = []
     for i in skredtypenr:
-        print(i)
-        print(skredtype[i])
+        #print(i)
+        #print(skredtype[i])
         skred.addfilter_egenskap('2326=' + str(skredtypenr[sNum]))
         stat = skred.statistikk()
         data.append([skredtype[i], stat['antall']])
         sNum = sNum + 1
     return data
 
-print(hentSkred())
+def enkeltSkred():
+    skredObj = nvdbapi.nvdbFagdata(445)
+    skredObj.addfilter_geo( { 'vegreferanse' : 'fv241', 'fylke' : 14} )
+    #skredObj.addfilter_egenskap('2326=4198')
+    ettobjekt = skredObj.nesteNvdbFagObjekt()
+    ettobjekt = skredObj.egenskap(2326)
 
+    return ettobjekt
+
+def enkeltSkredFagObj():
+    skredO = nvdbapi.nvdbFagdata(445)
+    skredO.addfilter_geo( { 'vegreferanse' : 'fv241', 'fylke' : 14} )
+    skredO.addfilter_egenskap('2326=4198')
+    #ettobjekt = skredO.egenskapverdi()
+
+    return ettobjekt
+
+print(hentSkred())
+print(enkeltSkred())
 #print(liste)
 #print(skred.statistikk())
 #ettskred = skred.nesteNvdbFagObjekt()

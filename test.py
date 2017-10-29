@@ -4,17 +4,7 @@ import pandas as pd
 from flask import Flask, request, render_template
 from wtforms import Form, IntegerField, StringField, validators
 import requests
-"""
-def getSkred(veg, fylke):
-    skredtype = {4198 : 'Stein', 4199: 'Jord/løsmasse', 5351: 'Is/stein', 4200: 'Snø', 4201: 'Is', 4202: 'Flomskred (vann+stein+jord)', 4203: 'Sørpeskred (vann+snø+stein)', 13103: 'Utglidning av veg'}
-    s = nvdbapi.nvdbFagdata(445)
-    s.addfilter_geo({'vegreferanse' : veg, 'fylke' : fylke})
-    i = 0
-    antallskred =  {}
-    for i in skredtype[i][0]:
-        antallskred[skredtype[]]
-        i = i + 1
-"""
+
 
 #print(data)
 def hentSkred(veg='Fv241', fylke=14):
@@ -39,24 +29,33 @@ def hentSkred(veg='Fv241', fylke=14):
     return data
 
 def enkeltSkred():
-    skredObj = nvdbapi.nvdbFagdata(445)
-    skredObj.addfilter_geo( { 'vegreferanse' : 'fv241', 'fylke' : 14} )
-    #skredObj.addfilter_egenskap('2326=4198')
-    ettobjekt = skredObj.nesteNvdbFagObjekt()
-    ettobjekt = skredObj.egenskap(2326)
+    #a = nvdbapi.nvdbFagdata(445)
+    #a.addfilter_geo( { 'vegreferanse' : 'fv241', 'fylke' : 14} )
+    #a.addfilter_egenskap('2326=4198')
+    ##skredObj.addfilter_egenskap('2326=4198')
+    #stat = a.statistikk()
+    #print(stat)
+    #b = a.nesteNvdbFagObjekt()
+    #print(b.egenskaper())
 
-    return ettobjekt
+    n = nvdbapi.nvdbFagdata(445)
+    n.addfilter_geo( {'vegreferanse' : '1400 fv241  obj = rstat.json()'})
+    n.addfilter_egenskap('2326=4198')
+    skred = n.nesteForekomst()
+    print(skred)
+    print(n.statistikk())
+    return 'ok'
 
 def enkeltSkredFagObj():
     skredO = nvdbapi.nvdbFagdata(445)
-    skredO.addfilter_geo( { 'vegreferanse' : 'fv241', 'fylke' : 14} )
-    skredO.addfilter_egenskap('2326=4198')
+    skredO.addfilter_geo( { 'vegreferanse' : '1400 fv241 hp1'} )
+    #skredO.addfilter_egenskap('2326=4198')
     #ettobjekt = skredO.egenskapverdi()
 
     return ettobjekt
 
-print(hentSkred())
-print(enkeltSkred())
+#print(hentSkred())
+enkeltSkred()
 #print(liste)
 #print(skred.statistikk())
 #ettskred = skred.nesteNvdbFagObjekt()

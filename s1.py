@@ -43,9 +43,9 @@ def skred(fylke, veg, hpfra, hptil, mfra, mtil):
     skredtypenr = [4198, 4199, 5351, 4200, 4201, 4202, 4203, 13103]
     skredtype = {4198 : 'Stein', 4199: 'Jord/løsmasse', 5351: 'Is/stein', 4200: 'Snø', 4201: 'Is', 4202: 'Flomskred (vann+stein+jord)', 4203: 'Sørpeskred (vann+snø+stein)', 13103: 'Utglidning av veg'}
     vegref = str(fylke) + '00' + veg + 'hp' + str(hpfra) + 'm' + str(mfra) + '-' + 'hp' + str(hptil) + 'm' + str(mtil)
-    filtre = {'egenskap': '2326=4198', 'vegreferanse' : vegref , 'segmentering' : 'false'}
-    rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
-    obj = rstat.json()
+    #filtre = {'egenskap': '2326=4198', 'vegreferanse' : vegref , 'segmentering' : 'false'}
+    #rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
+    #obj = rstat.json()
     #print(vegref)
     #print(obj)
     sNum = 0

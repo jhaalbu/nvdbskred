@@ -10,7 +10,7 @@ import os, time, glob
 import requests
 #import pygal
 
-def skred(fylke = 14, veg = 'fv13', hpfra = 7, hptil = 9, mfra = 14000, mtil = 5000):
+def skred(fylke = 14, veg = 'Fv241', hpfra = 1, hptil = 1, mfra = 600, mtil = 4000):
     api = 'https://www.vegvesen.no/nvdb/api/v2/'
     headers =   { 'accept' : 'application/vnd.vegvesen.nvdb-v2+json',
                             'X-Client' : 'nvdbskred.py',
@@ -20,10 +20,12 @@ def skred(fylke = 14, veg = 'fv13', hpfra = 7, hptil = 9, mfra = 14000, mtil = 5
     url = api + 'vegobjekter/' + str(objType)
     skredtypenr = [4198, 4199, 5351, 4200, 4201, 4202, 4203, 13103]
     skredtype = {4198 : 'Stein', 4199: 'Jord/løsmasse', 5351: 'Is/stein', 4200: 'Snø', 4201: 'Is', 4202: 'Flomskred (vann+stein+jord)', 4203: 'Sørpeskred (vann+snø+stein)', 13103: 'Utglidning av veg'}
-    vegref = str(fylke) + '00' + veg + 'hp' + str(hpfra) + 'm' + str(mfra) + '-' + 'hp' + str(hptil) + 'm' + str(mtil)
-    filtre = {'egenskap': '2326=4198', 'vegreferanse' : vegref , 'segmentering' : 'false'}
-    rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
-    obj = rstat.json()
+    vegref = 'Fv337hp1m24000-hp1m28000'
+    #vegref = veg + 'hp' + str(hpfra) + 'm' + str(mfra) + '-' + str(mtil)
+    print(vegref)
+    #filtre = {'egenskap': '2326=4198', 'vegreferanse' : vegref , 'segmentering' : 'false'}
+    #rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
+    #obj = rstat.json()
     #print(vegref)
     #print(obj)
     sNum = 0
@@ -32,7 +34,8 @@ def skred(fylke = 14, veg = 'fv13', hpfra = 7, hptil = 9, mfra = 14000, mtil = 5
         filtre = {'egenskap': '2326=' + str(skredtypenr[sNum]), 'vegreferanse' : vegref , 'segmentering' : 'false'}
         rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
         obj = rstat.json()
-        data.append([skredtype[i], obj['antall']])
+        print(obj)
+        #data.append([skredtype[i], obj['antall']])
         sNum = sNum + 1
     return data
 
